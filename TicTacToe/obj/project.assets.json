@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\GitHub\\CSharpEducation\\TicTacToe\\Task2.csproj",
-      "projectName": "Task2",
-      "projectPath": "C:\\GitHub\\CSharpEducation\\TicTacToe\\Task2.csproj",
+      "projectUniqueName": "C:\\GitHub\\CSharpEducation\\TicTacToe\\Task2_TicTacToe.csproj",
+      "projectName": "Task2_TicTacToe",
+      "projectPath": "C:\\GitHub\\CSharpEducation\\TicTacToe\\Task2_TicTacToe.csproj",
       "packagesPath": "C:\\Users\\BlackRaven\\.nuget\\packages\\",
       "outputPath": "C:\\GitHub\\CSharpEducation\\TicTacToe\\obj\\",
       "projectStyle": "PackageReference",
