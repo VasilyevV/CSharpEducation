@@ -1,6 +1,6 @@
 ﻿using System;
 
-class TicTacToe
+class Task2_TicTacToe
 {
     static void Main()
     {
