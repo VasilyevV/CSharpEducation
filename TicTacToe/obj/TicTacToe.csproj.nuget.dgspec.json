@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\GitHub\\CSharpEducation\\Task1\\Task1.csproj": {}
+    "C:\\GitHub\\CSharpEducation\\TicTacToe\\TicTacToe.csproj": {}
   },
   "projects": {
-    "C:\\GitHub\\CSharpEducation\\Task1\\Task1.csproj": {
+    "C:\\GitHub\\CSharpEducation\\TicTacToe\\TicTacToe.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GitHub\\CSharpEducation\\Task1\\Task1.csproj",
-        "projectName": "Task1",
-        "projectPath": "C:\\GitHub\\CSharpEducation\\Task1\\Task1.csproj",
+        "projectUniqueName": "C:\\GitHub\\CSharpEducation\\TicTacToe\\TicTacToe.csproj",
+        "projectName": "TicTacToe",
+        "projectPath": "C:\\GitHub\\CSharpEducation\\TicTacToe\\TicTacToe.csproj",
         "packagesPath": "C:\\Users\\BlackRaven\\.nuget\\packages\\",
-        "outputPath": "C:\\GitHub\\CSharpEducation\\Task1\\obj\\",
+        "outputPath": "C:\\GitHub\\CSharpEducation\\TicTacToe\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
