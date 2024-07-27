@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 
 class Task2_TicTacToe
 {
@@ -9,7 +10,7 @@ class Task2_TicTacToe
         Console.WriteLine("Играем в игру <Крестики-Нолики>, хотите сыграть с другим игроком? (y/n)");
 
         ConsoleKeyInfo key = Console.ReadKey();
-        while (true)
+        while (true)                        
         {
             if (key.Key == ConsoleKey.N)
             {
@@ -33,13 +34,16 @@ class Task2_TicTacToe
         for (int i = 0; ; i++)
         {
             Task2_TicTacToe.Move(matrix);
-
-            
+            if (Task2_TicTacToe.Win(matrix) == true)
+            {
+                Console.ReadLine();
+                return;
+            }    
         }
 
-        Console.ReadLine();
+
     }
-    static void UI(char[] matrix, int color)
+    static void UI(char[] matrix, int color)            //вывод игрового поля
         {
             var line = "-------------";           
             Console.WriteLine(line);
@@ -66,11 +70,18 @@ class Task2_TicTacToe
                   Console.WriteLine("|\n" + line);
             }
             return;
-        }
-    static void Move(char[] matrix)
+        }       
+    static void Move(char[] matrix)             //
     {
+        string s1 = string.Empty;    // ход первого игрока
         Console.Write("Ход игрока Х: ");
-        string s1 = Console.ReadLine();  // ход первого игрока
+        do
+            {              
+                s1 = Console.ReadLine();
+                if (Char.IsDigit(s1, 0) == false)
+                    Console.Write("Неверный ход, еще раз: ");
+        } while (Char.IsDigit(s1, 0) == false);
+
         var move1 = int.Parse(s1);
         for (int i = 0; i < 9; i++)
             if (move1 - 1 == i)
@@ -78,7 +89,7 @@ class Task2_TicTacToe
                 matrix[i] = 'X';
             }
         Task2_TicTacToe.UI(matrix, 1);
-        if (Task2_TicTacToe.Win(matrix) == true)  // проверка на победу
+        if (Task2_TicTacToe.Win(matrix) == true)
             return;
 
         int counter = 0;  // проверка пустых клеток
@@ -94,8 +105,15 @@ class Task2_TicTacToe
             return;
         }
 
-        Console.Write("Ход игрока O: ");
-        string s2 = Console.ReadLine(); // ход второго игрока
+        string s2 = string.Empty;    // ход второго игрока
+        Console.Write("Ход игрока О: ");
+        do
+        {
+            s2 = Console.ReadLine();
+            if (Char.IsDigit(s2, 0) == false)
+                Console.Write("Неверный ход, еще раз: ");
+        } while (Char.IsDigit(s2, 0) == false);
+
         var move2 = int.Parse(s2);
         for (int i = 0; i < 9; i++)
             if (move2 - 1 == i)
@@ -103,13 +121,13 @@ class Task2_TicTacToe
                 matrix[i] = 'O';
             }
         Task2_TicTacToe.UI(matrix, 2);
-        if(Task2_TicTacToe.Win(matrix) == true)     // проверка на победу
+        if(Task2_TicTacToe.Win(matrix) == true)   
             return;
 
         return;
     }
 
-    static bool Win (char[] matrix)
+    static bool Win (char[] matrix)       // проверка на победу
     {
         if (matrix[0] == matrix[1] && matrix[1] == matrix[2])
         {
