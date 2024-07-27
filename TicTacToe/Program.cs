@@ -34,117 +34,7 @@ class Task2_TicTacToe
         {
             Task2_TicTacToe.Move(matrix);
 
-            if (matrix[0] == matrix[1] && matrix[1] == matrix[2])
-            {
-                if (matrix[0] == 'X')
-                {
-                    Console.WriteLine("Победил игрок Х");
-                    break;
-                }
-                else if (matrix[0] =='O')
-                {
-                    Console.WriteLine("Победил игрок O");
-                    break;
-                }
-            }
-
-            if (matrix[3] == matrix[4] && matrix[4] == matrix[5])
-            {
-                if (matrix[3] == 'X')
-                {
-                    Console.WriteLine("Победил игрок Х");
-                    break;
-                }
-                else if (matrix[3] == 'O')
-                {
-                    Console.WriteLine("Победил игрок O");
-                    break;
-                }
-            }
-
-            if (matrix[6] == matrix[7] && matrix[7] == matrix[8])
-            {
-                if (matrix[6] == 'X')
-                {
-                    Console.WriteLine("Победил игрок Х");
-                    break;
-                }
-                else if (matrix[6] == 'O')
-                {
-                    Console.WriteLine("Победил игрок O");
-                    break;
-                }
-            }
-
-            if (matrix[0] == matrix[3] && matrix[3] == matrix[6])
-            {
-                if (matrix[0] == 'X')
-                {
-                    Console.WriteLine("Победил игрок Х");
-                    break;
-                }
-                else if (matrix[0] == 'O')
-                {
-                    Console.WriteLine("Победил игрок O");
-                    break;
-                }
-            }
-
-            if (matrix[1] == matrix[4] && matrix[4] == matrix[7])
-            {
-                if (matrix[1] == 'X')
-                {
-                    Console.WriteLine("Победил игрок Х");
-                    break;
-                }
-                else if (matrix[1] == 'O')
-                {
-                    Console.WriteLine("Победил игрок O");
-                    break;
-                }
-            }
-
-            if (matrix[2] == matrix[5] && matrix[5] == matrix[8])
-            {
-                if (matrix[2] == 'X')
-                {
-                    Console.WriteLine("Победил игрок Х");
-                    break;
-                }
-                else if (matrix[2] == 'O')
-                {
-                    Console.WriteLine("Победил игрок O");
-                    break;
-                }
-            }
-
-            if (matrix[0] == matrix[4] && matrix[4] == matrix[8])
-            {
-                if (matrix[0] == 'X')
-                {
-                    Console.WriteLine("Победил игрок Х");
-                    break;
-                }
-                else if (matrix[0] == 'O')
-                {
-                    Console.WriteLine("Победил игрок O");
-                    break;
-                }
-            }
-
-            if (matrix[2] == matrix[4] && matrix[4] == matrix[6])
-            {
-                if (matrix[2] == 'X')
-                {
-                    Console.WriteLine("Победил игрок Х");
-                    break;
-                }
-                else if (matrix[2] == 'O')
-                {
-                    Console.WriteLine("Победил игрок O");
-                    break;
-                }
-            }
+            
         }
 
         Console.ReadLine();
@@ -188,6 +78,8 @@ class Task2_TicTacToe
                 matrix[i] = 'X';
             }
         Task2_TicTacToe.UI(matrix, 1);
+        if (Task2_TicTacToe.Win(matrix) == true)  // проверка на победу
+            return;
 
         int counter = 0;  // проверка пустых клеток
         for (int j = 0; j < 9; j++)
@@ -211,8 +103,126 @@ class Task2_TicTacToe
                 matrix[i] = 'O';
             }
         Task2_TicTacToe.UI(matrix, 2);
-
+        if(Task2_TicTacToe.Win(matrix) == true)     // проверка на победу
+            return;
 
         return;
+    }
+
+    static bool Win (char[] matrix)
+    {
+        if (matrix[0] == matrix[1] && matrix[1] == matrix[2])
+        {
+            if (matrix[0] == 'X')
+            {
+                Console.WriteLine("Победил игрок Х");
+                return true;
+            }
+            else if (matrix[0] == 'O')
+            {
+                Console.WriteLine("Победил игрок O");
+                return true;
+            }
+        }
+
+        if (matrix[3] == matrix[4] && matrix[4] == matrix[5])
+        {
+            if (matrix[3] == 'X')
+            {
+                Console.WriteLine("Победил игрок Х");
+                return true;
+            }
+            else if (matrix[3] == 'O')
+            {
+                Console.WriteLine("Победил игрок O");
+                return true;
+            }
+        }
+
+        if (matrix[6] == matrix[7] && matrix[7] == matrix[8])
+        {
+            if (matrix[6] == 'X')
+            {
+                Console.WriteLine("Победил игрок Х");
+                return true;
+            }
+            else if (matrix[6] == 'O')
+            {
+                Console.WriteLine("Победил игрок O");
+                return true;
+            }
+        }
+
+        if (matrix[0] == matrix[3] && matrix[3] == matrix[6])
+        {
+            if (matrix[0] == 'X')
+            {
+                Console.WriteLine("Победил игрок Х");
+                return true;
+            }
+            else if (matrix[0] == 'O')
+            {
+                Console.WriteLine("Победил игрок O");
+                return true;
+            }
+        }
+
+        if (matrix[1] == matrix[4] && matrix[4] == matrix[7])
+        {
+            if (matrix[1] == 'X')
+            {
+                Console.WriteLine("Победил игрок Х");
+                return true;
+            }
+            else if (matrix[1] == 'O')
+            {
+                Console.WriteLine("Победил игрок O");
+                return true;
+            }
+        }
+
+        if (matrix[2] == matrix[5] && matrix[5] == matrix[8])
+        {
+            if (matrix[2] == 'X')
+            {
+                Console.WriteLine("Победил игрок Х");
+                return true;
+            }
+            else if (matrix[2] == 'O')
+            {
+                Console.WriteLine("Победил игрок O");
+                return true;
+            }
+        }
+
+        if (matrix[0] == matrix[4] && matrix[4] == matrix[8])
+        {
+            if (matrix[0] == 'X')
+            {
+                Console.WriteLine("Победил игрок Х");
+                return true;
+            }
+            else if (matrix[0] == 'O')
+            {
+                Console.WriteLine("Победил игрок O");
+                return true;
+            }
+        }
+
+        if (matrix[2] == matrix[4] && matrix[4] == matrix[6])
+        {
+            if (matrix[2] == 'X')
+            {
+                Console.WriteLine("Победил игрок Х");
+                return true;
+            }
+            else if (matrix[2] == 'O')
+            {
+                Console.WriteLine("Победил игрок O");
+                return true;
+            }
+        }
+
+        return false;
     }
 }
