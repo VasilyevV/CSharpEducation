@@ -1,0 +1,15 @@
+C:\GitHub\CSharpEducation\TicTacToe\bin\Debug\net6.0\Task2_TicTacToe.exe
+C:\GitHub\CSharpEducation\TicTacToe\bin\Debug\net6.0\Task2_TicTacToe.deps.json
+C:\GitHub\CSharpEducation\TicTacToe\bin\Debug\net6.0\Task2_TicTacToe.runtimeconfig.json
+C:\GitHub\CSharpEducation\TicTacToe\bin\Debug\net6.0\Task2_TicTacToe.dll
+C:\GitHub\CSharpEducation\TicTacToe\bin\Debug\net6.0\Task2_TicTacToe.pdb
+C:\GitHub\CSharpEducation\TicTacToe\obj\Debug\net6.0\Task2_TicTacToe.csproj.AssemblyReference.cache
+C:\GitHub\CSharpEducation\TicTacToe\obj\Debug\net6.0\Task2_TicTacToe.GeneratedMSBuildEditorConfig.editorconfig
+C:\GitHub\CSharpEducation\TicTacToe\obj\Debug\net6.0\Task2_TicTacToe.AssemblyInfoInputs.cache
+C:\GitHub\CSharpEducation\TicTacToe\obj\Debug\net6.0\Task2_TicTacToe.AssemblyInfo.cs
+C:\GitHub\CSharpEducation\TicTacToe\obj\Debug\net6.0\Task2_TicTacToe.csproj.CoreCompileInputs.cache
+C:\GitHub\CSharpEducation\TicTacToe\obj\Debug\net6.0\Task2_TicTacToe.dll
+C:\GitHub\CSharpEducation\TicTacToe\obj\Debug\net6.0\refint\Task2_TicTacToe.dll
+C:\GitHub\CSharpEducation\TicTacToe\obj\Debug\net6.0\Task2_TicTacToe.pdb
+C:\GitHub\CSharpEducation\TicTacToe\obj\Debug\net6.0\Task2_TicTacToe.genruntimeconfig.cache
+C:\GitHub\CSharpEducation\TicTacToe\obj\Debug\net6.0\ref\Task2_TicTacToe.dll
