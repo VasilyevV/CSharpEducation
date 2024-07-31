@@ -82,15 +82,22 @@ class Task2_TicTacToe
                     Console.Write("Неверный ход, еще раз: ");
         } while (Char.IsDigit(s1, 0) == false);
 
-        var move1 = int.Parse(s1);
-        for (int i = 0; i < 9; i++)
-            if (move1 - 1 == i)
-            {
-                matrix[i] = 'X';
-            }
-        Task2_TicTacToe.UI(matrix, 1);
-        if (Task2_TicTacToe.Win(matrix) == true)
-            return;
+            var move1 = int.Parse(s1);
+            for (int i = 0; i < 9; i++)
+                if (move1 - 1 == i)
+                {
+
+                    if (Char.IsDigit(matrix[i]) == false)
+                    {
+                        Console.WriteLine("Неверный ход, еще раз: ");
+                        break;
+                    }
+                    matrix[i] = 'X';
+                }
+            Task2_TicTacToe.UI(matrix, 1);
+            if (Task2_TicTacToe.Win(matrix) == true)
+                return;
+
 
         int counter = 0;  // проверка пустых клеток
         for (int j = 0; j < 9; j++)
