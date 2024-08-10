@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection.PortableExecutable;
+using System.Xml.Linq;
 /// Phonebook, CRUD functionality, Singleton
 namespace Task3
 {
@@ -37,28 +38,57 @@ namespace Task3
         {
             foreach (var c in current)
                 Console.WriteLine(c.name + " " + c.number);
+            Console.WriteLine();
         } 
-        static public List<Abonent> SetAbon(Abonent abonent, List<Abonent> current) //добавление нового абонента
+        static public List<Abonent> SetAbon(Abonent abonent, List<Abonent> abonents) //добавление нового абонента
         {
-            if(current.Contains(abonent) == true)
+            int j = 0;
+            for (int i = 0; i < abonents.Count; i++)
             {
-                Console.WriteLine("Такой абонент уже есть в списке");
-                return current;
+                if (abonent.number == abonents[i].number && abonent.name == abonents[i].name)
+                {
+                    Console.WriteLine("Такой абонент уже есть в списке");
+                    j++;                  
+                }
+            }
+            if(j == 0)
+            {
+                abonents.Add(abonent);
+                Console.WriteLine("Добавлен!");
+                return abonents;
             }
             else
+                return abonents;
+        }
+        static public void SearchName(string name, List<Abonent> abonents) //поиск абонента по имени
+        {
+            int j = 0;
+            for (int i = 0; i < abonents.Count; i++)
             {
-                current.Add(abonent);
-                Console.WriteLine("Добавлен!");
-                return current;
+                if (name == abonents[i].name)
+                {
+                    Console.WriteLine("Найдено: " + abonents[i].name + " " + abonents[i].number);
+                    j++;
+                }
             }
+            if (j == 0)
+                Console.WriteLine("Такого абонента нет.");
+            Console.WriteLine();
         }
-        static public Abonent GetAbon(string name) //поиск абонента по имени
+        static public void SearchNumber(string number, List<Abonent> abonents) //поиск абонента по номеру телефона
         {
-            return new Abonent(" ", "");
-        }
-        static public Abonent GetAbon(Int64 number) //поиск абонента по номеру телефона
-        {
-            return new Abonent(" ", "");
+            int j = 0;
+            for (int i = 0; i < abonents.Count; i++)
+            {
+                if (number == abonents[i].number)
+                {
+                    Console.WriteLine("Найдено: " + abonents[i].name + " " + abonents[i].number);
+                    j++;
+                }
+            }
+            if (j == 0)
+                Console.WriteLine("Такого абонента нет.");
+            Console.WriteLine();
         }
         static public void DelAbon(Abonent abonent) //удаление абонента
         {
@@ -89,15 +119,21 @@ namespace Task3
                         Phonebook.Print(abonents);
                         break;
                     case "2":
-                        Console.WriteLine("Введите имя и номер телефона");
-                        var abon = new Abonent(Console.ReadLine(), Console.ReadLine());
+                        Console.WriteLine("Введите имя и номер телефона:");
+                        var name = Console.ReadLine();
+                        var number = Console.ReadLine();
+                        var abon = new Abonent(name, number);
                         abonents = Phonebook.SetAbon(abon, abonents);
                         break;
                     case "3":
-                        //GetAbon
+                        Console.WriteLine("Введите имя:");
+                        var searchName = Console.ReadLine();
+                        Phonebook.SearchName(searchName, abonents);
                         break;
                     case "4":
-                        //GetAbon
+                        Console.WriteLine("Введите номер:");
+                        var searchNumber = Console.ReadLine();
+                        Phonebook.SearchNumber(searchNumber, abonents);
                         break;
                     case "5":
                         //DelAbon
