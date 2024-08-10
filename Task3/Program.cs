@@ -62,6 +62,11 @@ namespace Task3
         }
         static public void SearchName(string name, List<Abonent> abonents) //поиск абонента по имени
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                Console.WriteLine("Неверный ввод");
+                return;
+            }
             int j = 0;
             for (int i = 0; i < abonents.Count; i++)
             {
@@ -77,6 +82,11 @@ namespace Task3
         }
         static public void SearchNumber(string number, List<Abonent> abonents) //поиск абонента по номеру телефона
         {
+            if (string.IsNullOrEmpty(number))
+            {
+                Console.WriteLine("Неверный ввод");
+                return;
+            }
             int j = 0;
             for (int i = 0; i < abonents.Count; i++)
             {
@@ -90,13 +100,33 @@ namespace Task3
                 Console.WriteLine("Такого абонента нет.");
             Console.WriteLine();
         }
-        static public void DelAbon(Abonent abonent) //удаление абонента
+        static public List<Abonent> DelAbon(string item, List<Abonent> abonents) //удаление абонента
         {
+            if (string.IsNullOrEmpty(item))
+            {
+                Console.WriteLine("Неверный ввод");
+                return abonents;
+            }
 
+            for (int i = 0; i < abonents.Count; i++)
+            {
+                if (item == abonents[i].number || item == abonents[i].name)
+                {
+                    Console.WriteLine("Удален " + abonents[i].name + " " + abonents[i].number);
+                    abonents.RemoveAt(i);
+                    return abonents;
+                }               
+            }
+            return abonents;
         }
         static public void Save (List<Abonent> abonents) //сохранение телефонной книги в файл
         {
+            string[] text = new string[abonents.Count]; 
+            for(int i = 0; i < abonents.Count; i++)
+                text[i] = abonents[i].name + " " + abonents[i].number;
 
+            File.WriteAllLines(path, text);
+            Console.WriteLine("Файл сохранен");
         }
     }
     class Run
@@ -108,7 +138,7 @@ namespace Task3
             while (true)
             {
                 Console.WriteLine("1.Вывести на экран все записи телефонной книги\n2.Добавить нового абонента\n3.Найти абонента по имени" +
-                    "\n4.Найти абонента по номеру телефона\n5.Удаление абонента\n6.Выход\n");
+                    "\n4.Найти абонента по номеру телефона\n5.Удаление абонента\n6.Сохранить изменения\n7.Выход");
                 Console.Write("Введите команду: ");
 
                 string input = Console.ReadLine();
@@ -124,6 +154,7 @@ namespace Task3
                         var number = Console.ReadLine();
                         var abon = new Abonent(name, number);
                         abonents = Phonebook.SetAbon(abon, abonents);
+                        Phonebook.Save(abonents);
                         break;
                     case "3":
                         Console.WriteLine("Введите имя:");
@@ -136,11 +167,16 @@ namespace Task3
                         Phonebook.SearchNumber(searchNumber, abonents);
                         break;
                     case "5":
-                        //DelAbon
+                        Console.WriteLine("Введите имя или номер:");
+                        var item = Console.ReadLine();
+                        abonents = Phonebook.DelAbon(item, abonents);
                         break;
                     case "6":
-                        //Save
-                        return;    
+                        Phonebook.Save(abonents);
+                        break;
+                    case "7":
+                        Phonebook.Save(abonents);
+                        return;
                     default:
                         Console.WriteLine("Неверная команда. Попробуйте еще раз.\n");
                         break;
