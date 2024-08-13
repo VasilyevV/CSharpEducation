@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-class Task2_TicTacToe
+class Task2
 {
     static void Main()
     {
@@ -29,12 +29,12 @@ class Task2_TicTacToe
         }
         
         Console.WriteLine();
-        Task2_TicTacToe.UI(matrix, 0);
+        Task2.UI(matrix, 0);
 
         for (int i = 0; ; i++)
         {
-            Task2_TicTacToe.Move(matrix);
-            if (Task2_TicTacToe.Win(matrix) == true)
+            Task2.Move(matrix);
+            if (Task2.Win(matrix) == true)
             {
                 Console.ReadLine();
                 return;
@@ -76,10 +76,10 @@ class Task2_TicTacToe
         string s1 = string.Empty;    // ход первого игрока
         Console.Write("Ход игрока Х: ");
         do
-            {              
-                s1 = Console.ReadLine();
-                if (Char.IsDigit(s1, 0) == false)
-                    Console.Write("Неверный ход, еще раз: ");
+        {              
+           s1 = Console.ReadLine();
+           if (Char.IsDigit(s1, 0) == false)
+              Console.Write("Неверный ход, еще раз: ");
         } while (Char.IsDigit(s1, 0) == false);
 
             var move1 = int.Parse(s1);
@@ -94,8 +94,8 @@ class Task2_TicTacToe
                     }
                     matrix[i] = 'X';
                 }
-            Task2_TicTacToe.UI(matrix, 1);
-            if (Task2_TicTacToe.Win(matrix) == true)
+            Task2.UI(matrix, 1);
+            if (Task2.Win(matrix) == true)
                 return;
 
 
@@ -127,8 +127,8 @@ class Task2_TicTacToe
             {
                 matrix[i] = 'O';
             }
-        Task2_TicTacToe.UI(matrix, 2);
-        if(Task2_TicTacToe.Win(matrix) == true)   
+        Task2.UI(matrix, 2);
+        if(Task2.Win(matrix) == true)   
             return;
 
         return;

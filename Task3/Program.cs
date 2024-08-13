@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection.PortableExecutable;
 using System.Xml.Linq;
-/// Phonebook, CRUD functionality, Singleton
+/// Phonebook
 namespace Task3
 {
     class Abonent
@@ -17,9 +17,16 @@ namespace Task3
     }
     class Phonebook
     {
-        const string path = "C:\\GitHub\\CSharpEducation\\Task3\\phonebook.txt";
-
-        static public List<Abonent> Read()//чтение списка аобонентов из файла
+        private static Phonebook instance;
+        private Phonebook() { }
+        public static Phonebook GetInstance()
+        {
+            if (instance == null)
+                instance = new Phonebook();
+            return instance;
+        }
+        const string path = "phonebook.txt";
+        internal List<Abonent> Read()//чтение списка аобонентов из файла
         {
             List<Abonent> abonents = new List<Abonent>();
             
@@ -34,13 +41,13 @@ namespace Task3
 
             return abonents;
         }
-        static public void Print(List<Abonent> current) //вывод на экран сохраненной версии телефонной книги
+        internal void Print(List<Abonent> current) //вывод на экран сохраненной версии телефонной книги
         {
             foreach (var c in current)
                 Console.WriteLine(c.name + " " + c.number);
             Console.WriteLine();
-        } 
-        static public List<Abonent> SetAbon(Abonent abonent, List<Abonent> abonents) //добавление нового абонента
+        }
+        internal List<Abonent> SetAbon(Abonent abonent, List<Abonent> abonents) //добавление нового абонента
         {
             int j = 0;
             for (int i = 0; i < abonents.Count; i++)
@@ -60,7 +67,7 @@ namespace Task3
             else
                 return abonents;
         }
-        static public void SearchName(string name, List<Abonent> abonents) //поиск абонента по имени
+        internal void SearchName(string name, List<Abonent> abonents) //поиск абонента по имени
         {
             if (string.IsNullOrEmpty(name))
             {
@@ -80,7 +87,7 @@ namespace Task3
                 Console.WriteLine("Такого абонента нет.");
             Console.WriteLine();
         }
-        static public void SearchNumber(string number, List<Abonent> abonents) //поиск абонента по номеру телефона
+        internal void SearchNumber(string number, List<Abonent> abonents) //поиск абонента по номеру телефона
         {
             if (string.IsNullOrEmpty(number))
             {
@@ -100,7 +107,7 @@ namespace Task3
                 Console.WriteLine("Такого абонента нет.");
             Console.WriteLine();
         }
-        static public List<Abonent> DelAbon(string item, List<Abonent> abonents) //удаление абонента
+        internal List<Abonent> DelAbon(string item, List<Abonent> abonents) //удаление абонента
         {
             if (string.IsNullOrEmpty(item))
             {
@@ -119,7 +126,7 @@ namespace Task3
             }
             return abonents;
         }
-        static public void Save (List<Abonent> abonents) //сохранение телефонной книги в файл
+        internal void Save (List<Abonent> abonents) //сохранение телефонной книги в файл
         {
             string[] text = new string[abonents.Count]; 
             for(int i = 0; i < abonents.Count; i++)
@@ -133,7 +140,8 @@ namespace Task3
     {
         static void Main() 
         {
-            List<Abonent> abonents = Phonebook.Read();
+            Phonebook phonebook = Phonebook.GetInstance();
+            List<Abonent> abonents = phonebook.Read();
 
             while (true)
             {
@@ -146,36 +154,36 @@ namespace Task3
                 switch (input)
                 {
                     case "1":
-                        Phonebook.Print(abonents);
+                        phonebook.Print(abonents);
                         break;
                     case "2":
                         Console.WriteLine("Введите имя и номер телефона:");
                         var name = Console.ReadLine();
                         var number = Console.ReadLine();
                         var abon = new Abonent(name, number);
-                        abonents = Phonebook.SetAbon(abon, abonents);
-                        Phonebook.Save(abonents);
+                        abonents = phonebook.SetAbon(abon, abonents);
+                        phonebook.Save(abonents);
                         break;
                     case "3":
                         Console.WriteLine("Введите имя:");
                         var searchName = Console.ReadLine();
-                        Phonebook.SearchName(searchName, abonents);
+                        phonebook.SearchName(searchName, abonents);
                         break;
                     case "4":
                         Console.WriteLine("Введите номер:");
                         var searchNumber = Console.ReadLine();
-                        Phonebook.SearchNumber(searchNumber, abonents);
+                        phonebook.SearchNumber(searchNumber, abonents);
                         break;
                     case "5":
                         Console.WriteLine("Введите имя или номер:");
                         var item = Console.ReadLine();
-                        abonents = Phonebook.DelAbon(item, abonents);
+                        abonents = phonebook.DelAbon(item, abonents);
                         break;
                     case "6":
-                        Phonebook.Save(abonents);
+                        phonebook.Save(abonents);
                         break;
                     case "7":
-                        Phonebook.Save(abonents);
+                        phonebook.Save(abonents);
                         return;
                     default:
                         Console.WriteLine("Неверная команда. Попробуйте еще раз.\n");
