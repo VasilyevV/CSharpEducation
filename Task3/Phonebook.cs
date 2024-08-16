@@ -14,11 +14,31 @@
       return instance;
     }
     /// <summary>
+    /// Чтение перечня абонентов из файла.
+    /// </summary>
+    /// <returns>Список абонентов.</returns>
+    internal List<Abonent> Read()
+    {
+      List<Abonent> abonents = new List<Abonent>();
+      string path = "phonebook.txt";
+
+      string[] text = File.ReadAllLines(path);
+
+      for (int i = 0; i < text.Length; i++)
+      {
+        string[] s = text[i].Split(' ');
+        var abon = new Abonent(s[0], s[1]);
+        abonents.Add(abon);
+      }
+      return abonents;
+    }
+    /// <summary>
     /// Вывод на экран списка абонентов (телефонной книги).
     /// </summary>
-    internal void Print(List<Abonent> current)
+    internal void Print()
     {
-      foreach (var c in current)
+      List<Abonent> abonents = Read();
+      foreach (var c in abonents)
         Console.WriteLine(c.name + " " + c.number);
       Console.WriteLine();
     }
@@ -26,8 +46,9 @@
     /// Добавление нового абонента.
     /// </summary>
     /// <returns>Список с новым абонентом.</returns>
-    internal List<Abonent> AddAbon(Abonent abonent, List<Abonent> abonents)
+    internal void AddAbon(Abonent abonent)
     {
+      List<Abonent> abonents = Read();
       int j = 0;
       for (int i = 0; i < abonents.Count; i++)
       {
@@ -41,16 +62,17 @@
       {
         abonents.Add(abonent);
         Console.WriteLine("Добавлен!");
-        return abonents;
+        Save(abonents);
       }
       else
-        return abonents;
+        return;
     }
     /// <summary>
     /// Поиск абонента по имени.
     /// </summary>
-    internal void SearchName(string name, List<Abonent> abonents)
+    internal void SearchName(string name)
     {
+      List<Abonent> abonents = Read();
       if (string.IsNullOrEmpty(name))
       {
         Console.WriteLine("Неверный ввод");
@@ -72,8 +94,9 @@
     /// <summary>
     /// Поиск абонента по номеру телефона.
     /// </summary>
-    internal void SearchNumber(string number, List<Abonent> abonents)
+    internal void SearchNumber(string number)
     {
+      List<Abonent> abonents = Read();
       if (string.IsNullOrEmpty(number))
       {
         Console.WriteLine("Неверный ввод");
@@ -96,12 +119,13 @@
     /// Удаление абонента.
     /// </summary>
     /// <returns>Список без удаленного абонента.</returns>
-    internal List<Abonent> DelAbon(string item, List<Abonent> abonents)
+    internal void DelAbon(string item)
     {
+      List<Abonent> abonents = Read();
       if (string.IsNullOrEmpty(item))
       {
         Console.WriteLine("Неверный ввод");
-        return abonents;
+        return;
       }
 
       for (int i = 0; i < abonents.Count; i++)
@@ -110,10 +134,9 @@
         {
           Console.WriteLine("Удален " + abonents[i].name + " " + abonents[i].number);
           abonents.RemoveAt(i);
-          return abonents;
+          Save(abonents);
         }
       }
-      return abonents;
     }
     /// <summary>
     /// Сохранение телефонной книги в файл.
