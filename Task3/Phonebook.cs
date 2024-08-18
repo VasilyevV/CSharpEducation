@@ -13,6 +13,7 @@
         instance = new Phonebook();
       return instance;
     }
+
     /// <summary>
     /// Чтение перечня абонентов из файла.
     /// </summary>
@@ -32,6 +33,7 @@
       }
       return abonents;
     }
+
     /// <summary>
     /// Вывод на экран списка абонентов (телефонной книги).
     /// </summary>
@@ -42,6 +44,7 @@
         Console.WriteLine(c.name + " " + c.number);
       Console.WriteLine();
     }
+
     /// <summary>
     /// Добавление нового абонента.
     /// </summary>
@@ -67,30 +70,30 @@
       else
         return;
     }
+
     /// <summary>
-    /// Поиск абонента по имени.
+    /// Поиск абонента по имени или номеру.
     /// </summary>
-    internal void SearchName(string name)
+    internal string Exists(string item)
     {
-      List<Abonent> abonents = Read();
-      if (string.IsNullOrEmpty(name))
-      {
-        Console.WriteLine("Неверный ввод");
-        return;
-      }
+      List<Abonent> abonents = Read();      
       int j = 0;
+
       for (int i = 0; i < abonents.Count; i++)
       {
-        if (name == abonents[i].name)
-        {
-          Console.WriteLine("Найдено: " + abonents[i].name + " " + abonents[i].number);
+        if (item == abonents[i].name || item == abonents[i].number)
+        {         
           j++;
+          return "Найдено: " + abonents[i].name + " " + abonents[i].number;
         }
       }
+
       if (j == 0)
-        Console.WriteLine("Такого абонента нет.");
-      Console.WriteLine();
+        return "Такого абонента нет.";
+      else 
+        return null;
     }
+
     /// <summary>
     /// Поиск абонента по номеру телефона.
     /// </summary>
@@ -115,6 +118,7 @@
         Console.WriteLine("Такого абонента нет.");
       Console.WriteLine();
     }
+
     /// <summary>
     /// Удаление абонента.
     /// </summary>
@@ -138,6 +142,7 @@
         }
       }
     }
+
     /// <summary>
     /// Сохранение телефонной книги в файл.
     /// </summary>

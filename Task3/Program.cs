@@ -8,8 +8,8 @@
       
       while (true)
       {
-        Console.WriteLine("1.Вывести на экран все записи телефонной книги\n2.Добавить нового абонента\n3.Найти абонента по имени" +
-                    "\n4.Найти абонента по номеру телефона\n5.Удаление абонента\n6.Выход");
+        Console.WriteLine("1.Вывести на экран все записи телефонной книги\n2.Добавить нового абонента\n3.Найти абонента по имени или номеру" +
+                    "\n4.Удаление абонента\n5.Выход");
         Console.Write("Введите команду: ");
 
         string input = Console.ReadLine();
@@ -27,21 +27,21 @@
             phonebook.AddAbon(abon);            
             break;
           case "3":
-            Console.WriteLine("Введите имя:");
-            var searchName = Console.ReadLine();
-            phonebook.SearchName(searchName);
+            Console.WriteLine("Введите имя или номер:");
+            var existString = Console.ReadLine();
+            if (string.IsNullOrEmpty(existString))
+            {
+              Console.WriteLine("Неверный ввод");
+              break;
+            }
+            Console.WriteLine(phonebook.Exists(existString));            
             break;
           case "4":
-            Console.WriteLine("Введите номер:");
-            var searchNumber = Console.ReadLine();
-            phonebook.SearchNumber(searchNumber);
-            break;
-          case "5":
             Console.WriteLine("Введите имя или номер:");
             var item = Console.ReadLine();
             phonebook.DelAbon(item);
             break;
-          case "6":
+          case "5":
             return;
           default:
             Console.WriteLine("Неверная команда. Попробуйте еще раз.\n");
