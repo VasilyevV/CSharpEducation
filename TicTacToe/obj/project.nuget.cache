@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vc/70Zwnm3S3zxKZNESOTqwcWilEB5239foSh4dY7qW496sn5GefcBysI2foVRlVCKBTBUNVb0mPFpD7fPKfIg==",
+  "dgSpecHash": "gPtluZjiEG9mSooP6orMnPi1tfiXzQWM0n3zYok9UNFac9i6r7m1KkrgW523GYc65vZyZfj66GJUBeXuXWBe3Q==",
   "success": true,
-  "projectFilePath": "C:\\GitHub\\CSharpEducation\\TicTacToe\\Task2_TicTacToe.csproj",
+  "projectFilePath": "C:\\GitHub\\CSharpEducation\\TicTacToe\\Task2.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

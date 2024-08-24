@@ -13,6 +13,11 @@
         instance = new Phonebook();
       return instance;
     }
+    
+    /// <summary>
+    /// Адрес хранения телефонной книги.
+    /// </summary>
+    const string path = "phonebook.txt";
 
     /// <summary>
     /// Чтение перечня абонентов из файла.
@@ -21,7 +26,6 @@
     internal List<Abonent> Read()
     {
       List<Abonent> abonents = new List<Abonent>();
-      string path = "phonebook.txt";
 
       string[] text = File.ReadAllLines(path);
 
@@ -42,7 +46,6 @@
       List<Abonent> abonents = Read();
       foreach (var c in abonents)
         Console.WriteLine(c.name + " " + c.number);
-      Console.WriteLine();
     }
 
     /// <summary>
@@ -56,25 +59,19 @@
       for (int i = 0; i < abonents.Count; i++)
       {
         if (abonent.number == abonents[i].number && abonent.name == abonents[i].name)
-        {
-          Console.WriteLine("Такой абонент уже есть в списке");
           j++;
-        }
       }
       if (j == 0)
       {
         abonents.Add(abonent);
-        Console.WriteLine("Добавлен!");
         Save(abonents);
       }
-      else
-        return;
     }
 
     /// <summary>
     /// Поиск абонента по имени или номеру.
     /// </summary>
-    internal string Exists(string item)
+    internal bool Exists(string item)
     {
       List<Abonent> abonents = Read();      
       int j = 0;
@@ -84,39 +81,14 @@
         if (item == abonents[i].name || item == abonents[i].number)
         {         
           j++;
-          return "Найдено: " + abonents[i].name + " " + abonents[i].number;
+          return true;
         }
       }
 
       if (j == 0)
-        return "Такого абонента нет.";
-      else 
-        return null;
-    }
-
-    /// <summary>
-    /// Поиск абонента по номеру телефона.
-    /// </summary>
-    internal void SearchNumber(string number)
-    {
-      List<Abonent> abonents = Read();
-      if (string.IsNullOrEmpty(number))
-      {
-        Console.WriteLine("Неверный ввод");
-        return;
-      }
-      int j = 0;
-      for (int i = 0; i < abonents.Count; i++)
-      {
-        if (number == abonents[i].number)
-        {
-          Console.WriteLine("Найдено: " + abonents[i].name + " " + abonents[i].number);
-          j++;
-        }
-      }
-      if (j == 0)
-        Console.WriteLine("Такого абонента нет.");
-      Console.WriteLine();
+        return false;
+      return 
+        true;
     }
 
     /// <summary>
@@ -126,17 +98,11 @@
     internal void DelAbon(string item)
     {
       List<Abonent> abonents = Read();
-      if (string.IsNullOrEmpty(item))
-      {
-        Console.WriteLine("Неверный ввод");
-        return;
-      }
 
       for (int i = 0; i < abonents.Count; i++)
       {
         if (item == abonents[i].number || item == abonents[i].name)
-        {
-          Console.WriteLine("Удален " + abonents[i].name + " " + abonents[i].number);
+        { 
           abonents.RemoveAt(i);
           Save(abonents);
         }
@@ -148,13 +114,11 @@
     /// </summary>
     internal void Save(List<Abonent> abonents)
     {
-      string path = "phonebook.txt";
       string[] text = new string[abonents.Count];
       for (int i = 0; i < abonents.Count; i++)
         text[i] = abonents[i].name + " " + abonents[i].number;
 
       File.WriteAllLines(path, text);
-      Console.WriteLine("Файл сохранен");
     }
   }
 }

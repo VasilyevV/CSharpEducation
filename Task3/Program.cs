@@ -18,13 +18,24 @@
         {
           case "1":
             phonebook.Print();
+            Console.WriteLine();
             break;
           case "2":
             Console.WriteLine("Введите имя и номер телефона:");
+
             var name = Console.ReadLine();
             var number = Console.ReadLine();
             var abon = new Abonent(name, number);
-            phonebook.AddAbon(abon);            
+
+            if (phonebook.Exists(name) || phonebook.Exists(number))
+              Console.WriteLine("Такой абонент уже существует");
+            else
+            {
+              phonebook.AddAbon(abon);
+              Console.WriteLine($"Абонент {abon.name}  {abon.number}  добавлен.");
+            }               
+            Console.WriteLine("Файл сохранен.");
+            Console.WriteLine();
             break;
           case "3":
             Console.WriteLine("Введите имя или номер:");
@@ -34,17 +45,39 @@
               Console.WriteLine("Неверный ввод");
               break;
             }
-            Console.WriteLine(phonebook.Exists(existString));            
+
+            if (phonebook.Exists(existString))
+              Console.WriteLine("Есть такой абонент.");
+            else
+              Console.WriteLine("Такого абонента нет.");
+            Console.WriteLine();
             break;
           case "4":
             Console.WriteLine("Введите имя или номер:");
             var item = Console.ReadLine();
-            phonebook.DelAbon(item);
+
+            if (string.IsNullOrEmpty(item))
+            {
+              Console.WriteLine("Неверный ввод");
+              Console.WriteLine();
+              return;
+            }
+
+            if (phonebook.Exists(item))
+            {
+              phonebook.DelAbon(item);
+              Console.WriteLine("Абонент удален.");
+              Console.WriteLine("Файл сохранен.");
+            }
+            else
+              Console.WriteLine("Абонента с такими данными не найдено.");
+            Console.WriteLine();
             break;
           case "5":
             return;
           default:
             Console.WriteLine("Неверная команда. Попробуйте еще раз.\n");
+            Console.WriteLine();
             break;
         }
       }
